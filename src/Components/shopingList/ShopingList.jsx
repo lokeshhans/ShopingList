@@ -1,9 +1,31 @@
 import React from 'react'
 import Header from '../Header/Header'
+import InputItem from '../InputItem/InputItem'
+import './ShopingInput.css'
+import ItemList from '../ItemList/ItemList'
 
 function ShopingList() {
-  return (
-    <Header  />
+const shopingItems = [{
+  id:1, name:"Lokesh", quantity:1,
+},
+{
+  id:2, name:"Karan",quantity:2,
+},
+{
+  id:3, name:"Lokesh",quantity:3,
+}]
+
+  return ( <>
+      <Header  />
+      <div className="current-shopping-list">
+        <InputItem /> 
+      </div>
+      <div className="item-list">
+        <ItemList 
+        ShopingItem={shopingItems}
+        />
+      </div>
+    </>
   )
 }
 
