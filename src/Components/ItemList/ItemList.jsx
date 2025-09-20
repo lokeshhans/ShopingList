@@ -11,6 +11,7 @@ function ItemList({ShopingItem}) {
                 key={item.id}
                 quantity= {item.quantity}
                 />
+                
             }
               
             )
