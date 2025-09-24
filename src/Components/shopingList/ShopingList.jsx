@@ -1,37 +1,35 @@
-import  { useState } from 'react'
+import { useReducer } from 'react'
 import Header from '../Header/Header'
 import InputItem from '../InputItem/InputItem'
 import './ShopingInput.css'
 import ItemList from '../ItemList/ItemList'
 import { ToastContainer } from 'react-toastify'
-import { v4 as uuidv4 } from 'uuid';
+import ItemReducer from '../../Reducers/ItemReducer'
 
 function ShopingList() {
-const [shopingItems, setShopingItem] = useState([])
+// const [shopingItems, setShopingItem] = useState([])
+const [shopingItems, dispatch] = useReducer(ItemReducer, []) // use Reducer take two argument first is function reducer and sec is initial state  and it return state variable and dispatch... ///when you call an dispatch function an inside your dispatch function u pass an action and automaticaly call  reducer function and  pass state variable and make changes to state variable
 
-function handleAddItem (itemName){
-  setShopingItem([...shopingItems, {id:uuidv4(), name:itemName, quantity: 1}])
-  // console.log(uuidv4())
+function handleAddItem (name){
+  dispatch({
+    type: 'add_item',
+    itemName: name
+  }); // it take an argument just a plan js object it has type and 
 }
- function handleAddQuantity(itemId){
-  const newShopingItems = shopingItems.map((item)=>{
-    if(item.id == itemId) 
-      item.quantity++ 
-      return item
-    })
-    setShopingItem(newShopingItems)
-   
- }
- function handleSubQuantity(itemId){
-  let newShopingItems = shopingItems.map((item)=>{
-    if(item.id == itemId) 
-    (item.quantity > 0) && 
-      item.quantity--;
-      return item
-    })
-     newShopingItems = newShopingItems.filter((item) => item.quantity > 0)
-    setShopingItem(newShopingItems)
- }
+function handleAddQuantity(id){
+   dispatch({
+   type: 'inc_item',
+   itemId: id
+ });
+}
+
+function handleSubQuantity(id){
+  dispatch({
+    type:'dec_item',
+    itemId: id
+  });
+}
+
   return ( <>
       <Header  />
       <ToastContainer />
@@ -42,7 +40,7 @@ function handleAddItem (itemName){
       </div>
       <div className="item-list">
         <ItemList 
-        ShopingItem={shopingItems}
+        ShopingItem = {shopingItems}
         subQuantity ={handleSubQuantity}
         addquantity={handleAddQuantity}
         />
