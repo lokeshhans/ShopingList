@@ -1,34 +1,26 @@
 import './Inputitem.css'
 import 'react-toastify/dist/ReactToastify.css'
-import { ShowError, ShowSucess } from '../../Utils/ShowTosts'
+import { ShowSucess } from '../../Utils/ShowTosts'
 import { useForm } from 'react-hook-form'
-// import { useEffect } from 'react'
+import { useContext } from 'react'
+import { ShopingDispatchContext } from '../../Providers/ShopingContext'
 
 
-function InputItem({addItem}) {
+function InputItem() {
+  const dispatch = useContext(ShopingDispatchContext);
   const {register, handleSubmit,formState: { errors }, reset} = useForm({
     mode:'onChange'
   })
-
-
-  // Errors .............................................
-  // useEffect(() => {
-  //   if(errors.item && errors.item.type == 'required' ){
-  //     ShowError("Item can't Empty");
-  //   }
-  //   else if(errors.item && errors.item.type == 'minLength'){
-  //     ShowError("Item name not less than 3")
-  //   }
-  // }, [errors.item && errors.item.type])
   
   const handleSubmission = (data) =>{
-    // console.log(data)
     ShowSucess(`${data.item} Added SucessFully!`)
-    addItem(data.item)
+    dispatch({
+      type:'add_item',
+      itemName: data.item
+    })
     reset();
     
   }
-  // console.log({...register("item", { required: true, minLength: 3 }) })
   return (
     <div className='Item-input-wrapper'>
       <form onSubmit={handleSubmit(handleSubmission)} >
