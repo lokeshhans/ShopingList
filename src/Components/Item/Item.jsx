@@ -1,5 +1,5 @@
 import React from 'react';
-import './item.css'
+import './Item.css'
 
 function Item({ itemName, quantity }) {
   // console.log(itemName)
