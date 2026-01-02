@@ -1,4 +1,4 @@
-import './Inputitem.css'
+import './InputItem.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { ShowSucess } from '../../Utils/ShowTosts'
 import { useForm } from 'react-hook-form'
