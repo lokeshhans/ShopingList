@@ -11,7 +11,7 @@ function ItemReducer(shopingItems, action) {
     ];
   } else if (action.type == "inc_item") {
     const newShopingItems = shopingItems.map((item) => {
-      if (item.id == action.itemId) quantity: item.quantity ++;
+      if (item.id == action.itemId) item.quantity ++;
       return item;
     });
     return newShopingItems;
