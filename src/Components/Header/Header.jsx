@@ -1,5 +1,5 @@
 import './Header.css'
-import HeaderImg from '../../assets/Logo_img.png'
+import HeaderImg from '../../assets/logo.png'
 function Header() {
   return (
     <div className='Header-container'>
